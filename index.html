@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrendRadar Phase 1 Live</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; background: #020817; color: #f1f5f9; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    .top { padding: 16px 20px; border-bottom: 1px solid #1e293b; background: #0a0f1e; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .title { font-size: 20px; font-weight: 800; }
+    .title span { color: #3b82f6; }
+    .links a { color: #93c5fd; text-decoration: none; margin-left: 14px; font-size: 14px; }
+    .links a:hover { text-decoration: underline; }
+    .hint { font-size: 12px; color: #94a3b8; padding: 10px 20px; }
+    iframe { width: 100%; height: calc(100vh - 88px); border: 0; display: block; }
+    .fallback { display: none; padding: 16px 20px; }
+    .btn { display: inline-block; background: #2563eb; color: #fff; text-decoration: none; padding: 10px 14px; border-radius: 8px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="title">Trend<span>Radar</span> — Phase 1 Live</div>
+    <div class="links">
+      <a href="https://pink-buckets-flow.loca.lt/feed" target="_blank" rel="noopener">Open Feed</a>
+      <a href="https://pink-buckets-flow.loca.lt/docs" target="_blank" rel="noopener">API Docs</a>
+      <a href="https://pink-buckets-flow.loca.lt/health" target="_blank" rel="noopener">Health</a>
+    </div>
+  </div>
+  <div class="hint">If the embedded panel does not load, use "Open Feed" above.</div>
+
+  <iframe id="feedFrame" src="https://pink-buckets-flow.loca.lt/feed" title="TrendRadar Live Feed"></iframe>
+
+  <div class="fallback" id="fallback">
+    <p>Live feed is temporarily unavailable. Use this direct link:</p>
+    <p><a class="btn" href="https://pink-buckets-flow.loca.lt/feed" target="_blank" rel="noopener">Open TrendRadar Feed</a></p>
+  </div>
+
+  <script>
+    const frame = document.getElementById('feedFrame');
+    const fallback = document.getElementById('fallback');
+    let loaded = false;
+    frame.addEventListener('load', () => { loaded = true; });
+    setTimeout(() => {
+      if (!loaded) {
+        frame.style.display = 'none';
+        fallback.style.display = 'block';
+      }
+    }, 7000);
+  </script>
+</body>
+</html>
